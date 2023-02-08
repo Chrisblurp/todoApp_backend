@@ -1,4 +1,4 @@
-import User from "../Models/UserModel.js";
+import User from "../Models/usermodel.js";
 import bcrypt from "bcrypt";
 import generateToken from "../utils/generatetoken.js";
 import mailgun from "mailgun-js";
