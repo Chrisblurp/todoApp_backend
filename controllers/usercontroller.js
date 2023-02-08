@@ -20,7 +20,7 @@ export const registerController = async (req, res) => {
     const userFound = await User.findOne({email})
  if (userFound){
     return res.json({
-        status: "user already existed"})
+        status: "user with email already existed"})
  }
 
 const salt = await bcrypt.genSalt(10);
@@ -68,9 +68,6 @@ export const loginController = async(req, res) => {
                     firstname: foundUser.firstname,
                     lastname: foundUser.lastname,
                     email: foundUser.email,
-                    // category:foundUser.category,
-                    // task: foundUser.task,
-                    // status:foundUser.status,
                     token: generateToken(foundUser._id)
                 }
             });
@@ -112,8 +109,7 @@ export const updateController = async(req, res) => {
             data: {
                 firstname: foundUser.firstname,
                 lastname: foundUser.lastname,
-                email: foundUser.email,
-                token: generateToken(foundUser._id)
+                email: foundUser.email 
             }
         });}
         else{

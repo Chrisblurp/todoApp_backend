@@ -1,9 +1,16 @@
 import Items from "../Models/todoitemsmodel.js";
+import User from "../Models/usermodel.js";
 
 
 export const todoItemsController = async (req, res) => {
-   
     try{
+        const profiler = await User.findById(req.userAuth)
+        if(!profiler){
+          return res.json({
+            "message":"error",
+            status:"you have to be logged in to be able to add items "
+          })  
+        }
 const newItem = new Items({
     item: req.body.item
 })
@@ -21,8 +28,14 @@ res.status(200).json({
 
 export const getTodoItemsController = async (req, res) => {
     try{
+        const profiler = await User.findById(req.userAuth)
         const allTodoItems = await Items.find({})
-        res.status(200).json(allTodoItems)
+        if(profiler){
+            return res.status(200).json(allTodoItems)
+        }
+        return res.json({
+            "message":"this user doesnt have any items"
+        })
     }catch(error){
         res.json(error.message)
     }

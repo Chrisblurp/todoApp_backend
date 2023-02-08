@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 
 const verifytoken = token => {
-    return jwt.verify(token,"ndxt34f51", (error, decoded) => {
+    return jwt.verify(token,process.env.JWT_KEY, (error, decoded) => {
         if(error){
             return false;
         }

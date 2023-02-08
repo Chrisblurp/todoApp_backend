@@ -11,9 +11,9 @@ userRoute.post("/login", loginController);
 // get user profile
 userRoute.get("/profile", loginChecker, getByIdController);
 
-userRoute.put("/:id",updateController);
+userRoute.put("/:id",loginChecker, updateController);
 
-userRoute.delete("/:id", deleteController);
+userRoute.delete("/:id", loginChecker, deleteController);
 
 userRoute.put("/passwordrecovery",passwordRecoveryController);
 
